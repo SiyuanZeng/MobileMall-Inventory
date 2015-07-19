@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mindtree.mcse.mobilemall.domain">
+	<class name="Inventory" table="inventory">
+		<id name="itemId" column="ITEMID">
+			<generator class="foreign">
+				<param name="property">item</param>
+			</generator>
+		</id>
+		<property name="quantity" column="QTY" not-null="true" />
+		<one-to-one name="item" class="com.mindtree.mcse.mobilemall.domain.Item" constrained="true" />
+	</class>
+</hibernate-mapping>

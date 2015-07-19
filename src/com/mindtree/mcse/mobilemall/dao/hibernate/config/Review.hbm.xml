@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mindtree.mcse.mobilemall.domain">
+
+	<class name="Review" table="review">
+		<id name="id" column="Id" unsaved-value="null">
+			<generator class="identity" />
+		</id>
+		<property name="itemId" column="itemid" />
+		<property name="name" column="Name" />
+		<property name="timeStamp" column="TimeStamp" />
+		<property name="title" column="title" />
+		<property name="description" column="Description" />
+	</class>
+</hibernate-mapping>
