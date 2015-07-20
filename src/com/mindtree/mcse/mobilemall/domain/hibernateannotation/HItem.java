@@ -178,13 +178,14 @@ public class HItem implements Serializable {
 	}
 	@OneToMany
     @JoinColumn(name="itemid", insertable=false, updatable=false, nullable=false)
-	public Set<HReview> getHReviews() {
+	public Set<HReview> gethReviews() {
 		return hReviews;
 	}
 
-	public void setHReviews(Set<HReview> hReviews) {
+	public void sethReviews(Set<HReview> hReviews) {
 		this.hReviews = hReviews;
 	}
+
 	
 	
 	@Override
@@ -209,7 +210,8 @@ public class HItem implements Serializable {
 		builder.append(", attribute4=");
 		builder.append(attribute4);
 		builder.append(", attribute5=");
-		builder.append(attribute5);
+		builder.append(", " + attribute5);
+		builder.append(hReviews);
 		builder.append("]");
 		return builder.toString();
 	}

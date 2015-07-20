@@ -62,6 +62,7 @@ public class HReview  implements Comparable<HReview>{
 	public void setTimeStamp(Date timeStamp) {
 		this.timeStamp = timeStamp;
 	}
+	
 	@Column(name = "title")
 	public String getTitle() {
 		return title;
@@ -100,12 +101,16 @@ public class HReview  implements Comparable<HReview>{
 			return false;
 		return true;
 	}
+
 	@Override
 	public int compareTo(HReview review) {
 		// TODO Auto-generated method stub
 		return timeStamp.compareTo( review.getTimeStamp()) ;
 	}
-
-	
-	
+	@Override
+	public String toString() {
+		return "HReview [id=" + id + ", itemId=" + itemId + ", name=" + name
+				+ ", timeStamp=" + timeStamp + ", title=" + title
+				+ ", description=" + description + "]";
+	}
 }
