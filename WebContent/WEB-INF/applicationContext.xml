@@ -35,7 +35,7 @@
 	<!-- Exposing WS using JAX-WS Spring Util -->	
      <wss:binding url="/WS/InventoryService" >
         <wss:service>
-            <ws:service bean="#inventorySEP"/>
+            <ws:service bean="inventorySEP"/>
         </wss:service>
     </wss:binding>
     

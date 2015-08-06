@@ -3,6 +3,8 @@ package com.mindtree.mcse.mobilemall.ws;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.mindtree.mcse.mobilemall.dao.InventoryDao;
 import com.mindtree.mcse.mobilemall.dao.ItemDao;
@@ -18,7 +20,7 @@ import com.mindtree.mcse.mobilemall.event.InventoryCheckEvent;
 
 @WebService(endpointInterface="com.mindtree.mcse.mobilemall.ws.InventoryWS", serviceName="InventoryService")
 public class InventoryServiceEndPoint implements InventoryWS {
-
+	private Logger logger = Logger.getLogger(InventoryServiceEndPoint.class);
 	private InventoryDao inventoryDao;
 	private ItemDao itemDao;
 	Gson gson = new Gson();
@@ -75,37 +77,38 @@ public class InventoryServiceEndPoint implements InventoryWS {
 	@Override
 	@WebMethod
 	public int addReview(final AddReviewEvent event) {
-    	System.out.println("Received Event: " + event);
+		logger.debug("Received Event: " + event);
 		Review review = gson.fromJson(event.getReview(), Review.class);
     	int result= itemDao.addReview(review);
-    	System.out.println("Review Id: " + result);
+    	logger.debug("Review Id: " + result);
 		return result;
 	}
 	
 	@Override
 	@WebMethod
 	public void addReviewHibernateAnnotation(final AddReviewEvent event) {
-		System.out.println("Received Event: " + event);
+		logger.debug("About to enter addReviewHibernateAnnotation method, received Event: " + event);
 		HReview hReview = gson.fromJson(event.gethReview(), HReview.class);
 		itemDao.addReviewHibernateAnnotation(hReview);
+		logger.debug("Exit addReviewHibernateAnnotation method");
 //		System.out.println("Review Id: " + result);
 //		return result;
 	}
 
 	@Override
 	public Item getItem(GetItemEvent event) {
-    	System.out.println("Get Item: " + event);
+		logger.debug("Get Item: " + event);
     	Item item= itemDao.getItem(event.getItemId());
-    	System.out.println("Get Item: " + item);
+    	logger.debug("Get Item: " + item);
 //		return gson.toJson(item);
     	return item;
 	}
 	
 	@Override
 	public HItem getHItem(GetHItemEvent event) {
-		System.out.println("Get Item: " + event);
+		logger.info("Get Item: " + event);
 		HItem item= itemDao.getHItem(event.getHItemId());
-		System.out.println("Get Item: " + item);
+		logger.info("Get Item: " + item);
 		return item;
 	}
 }//eof

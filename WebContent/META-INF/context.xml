@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+	<Environment name="url/log4j.configuration"
+		value="log4j.properties"
+		type="java.lang.String" />
+</Context>
