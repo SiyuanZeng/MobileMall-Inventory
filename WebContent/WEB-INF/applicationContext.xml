@@ -17,7 +17,6 @@
             http://www.springframework.org/schema/tx 
             http://www.springframework.org/schema/tx/spring-tx-3.2.xsd"
      		default-lazy-init="true">
-
 	
 	<bean id="inventorySEP" class="com.mindtree.mcse.mobilemall.ws.InventoryServiceEndPoint">
 		<property name="inventoryDao" ref="inventoryDao"></property>
@@ -35,7 +34,7 @@
 	<!-- Exposing WS using JAX-WS Spring Util -->	
      <wss:binding url="/WS/InventoryService" >
         <wss:service>
-            <ws:service bean="inventorySEP"/>
+            <ws:service bean="#inventorySEP"/>
         </wss:service>
     </wss:binding>
     
