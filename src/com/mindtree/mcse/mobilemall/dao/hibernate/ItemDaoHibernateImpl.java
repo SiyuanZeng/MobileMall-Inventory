@@ -50,7 +50,7 @@ public class ItemDaoHibernateImpl extends HibernateDaoSupport implements ItemDao
 	@Override
 	public Item getItem(String itemId) {
 /*	Old version	*/
-		Item item = (Item)this.getHibernateTemplate().get(Item.class, itemId);
+		Item item = (Item)HibernateXMLMappingUtil.getSessionFactory().openSession().get(Item.class, itemId);
 		
 		System.out.println(item);
 		return item;
