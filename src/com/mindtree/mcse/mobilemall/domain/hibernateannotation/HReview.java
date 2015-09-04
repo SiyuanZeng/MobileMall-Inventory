@@ -40,7 +40,7 @@ public class HReview  implements Comparable<HReview>{
 		this.id = id;
 	}
 	
-	@Column(name = "itemid", insertable=false, updatable=false, nullable=false)
+	@Column(name = "itemid")
 	public String getItemId() {
 		return itemId;
 	}

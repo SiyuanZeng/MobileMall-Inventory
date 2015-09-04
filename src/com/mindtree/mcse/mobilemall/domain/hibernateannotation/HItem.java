@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -177,7 +178,7 @@ public class HItem implements Serializable {
 		this.inventory = newInventory;
 	}
 	@OneToMany
-    @JoinColumn(name="itemid", insertable=false, updatable=false, nullable=false)
+    @JoinColumn(name="itemid")
 	public Set<HReview> gethReviews() {
 		return hReviews;
 	}
