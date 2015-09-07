@@ -4,23 +4,22 @@
 package com.mindtree.mcse.mobilemall.domain.hibernateannotation;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.Sort;
+import org.hibernate.annotations.SortType;
 
 @SuppressWarnings("unused")
 @Entity
@@ -40,7 +39,7 @@ public class HItem implements Serializable {
 	private String attribute5;
 	private HProduct hProduct;
 	private Inventory inventory;
-	private Set<HReview> hReviews = new HashSet<HReview>();
+	private SortedSet<HReview> hReviews = new TreeSet<HReview>();
 
 	public HItem() {
 		this.inventory = new Inventory();
@@ -179,11 +178,12 @@ public class HItem implements Serializable {
 	}
 	@OneToMany
     @JoinColumn(name="itemid")
-	public Set<HReview> gethReviews() {
+	@Sort(type = SortType.COMPARATOR, comparator = HReview.HReviewComparator.class)
+	public SortedSet<HReview> gethReviews() {
 		return hReviews;
 	}
 
-	public void sethReviews(Set<HReview> hReviews) {
+	public void sethReviews(SortedSet<HReview> hReviews) {
 		this.hReviews = hReviews;
 	}
 
