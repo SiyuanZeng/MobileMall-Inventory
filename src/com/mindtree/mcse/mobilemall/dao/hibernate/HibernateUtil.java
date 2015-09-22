@@ -14,7 +14,7 @@ public class HibernateUtil {
 		try {
 			Configuration configuration = new Configuration();
 		    configuration.configure("hibernate.cfg.xml");
-		    ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()). buildServiceRegistry();
+		    ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
 			return configuration.buildSessionFactory(serviceRegistry);
 		} catch (Throwable ex) {
 			throw new ExceptionInInitializerError(ex);
