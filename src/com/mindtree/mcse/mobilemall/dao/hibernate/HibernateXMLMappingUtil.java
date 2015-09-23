@@ -2,8 +2,6 @@ package com.mindtree.mcse.mobilemall.dao.hibernate;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 
 public class HibernateXMLMappingUtil {
@@ -12,10 +10,10 @@ public class HibernateXMLMappingUtil {
 
 	private static SessionFactory buildSessionFactory() {
 		try {
-			Configuration configuration = new Configuration();
-		    configuration.configure("hibernateXML.cfg.xml");
-		    ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()). buildServiceRegistry();
-			return configuration.buildSessionFactory(serviceRegistry);
+			Configuration cfg = new Configuration(); // for reading the hibernate.cfg.xml
+			SessionFactory sf = cfg.configure("hibernateXML.cfg.xml").buildSessionFactory(); //generate the connection
+			return sf;			
+			
 		} catch (Throwable ex) {
 			throw new ExceptionInInitializerError(ex);
 		}

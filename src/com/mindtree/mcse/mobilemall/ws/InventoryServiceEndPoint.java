@@ -71,7 +71,6 @@ public class InventoryServiceEndPoint implements InventoryWS {
 		Inventory inv = inventoryDao.getInventory(event.getItemId());
 		inv.setQuantity(inv.getQuantity() - event.getQuantity());
 		inventoryDao.updateInventory(inv);
-		
 	}
 
 	@Override

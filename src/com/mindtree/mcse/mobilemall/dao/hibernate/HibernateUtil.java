@@ -1,9 +1,7 @@
 package com.mindtree.mcse.mobilemall.dao.hibernate;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
+import org.hibernate.cfg.AnnotationConfiguration;
 
 
 public class HibernateUtil {
@@ -12,10 +10,9 @@ public class HibernateUtil {
 
 	private static SessionFactory buildSessionFactory() {
 		try {
-			Configuration configuration = new Configuration();
-		    configuration.configure("hibernate.cfg.xml");
-		    ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-			return configuration.buildSessionFactory(serviceRegistry);
+			AnnotationConfiguration cfg = new AnnotationConfiguration(); // for reading the hibernate.cfg.xml
+			SessionFactory sf = cfg.configure("hibernate.cfg.xml").buildSessionFactory(); //generate the connection
+			return sf;
 		} catch (Throwable ex) {
 			throw new ExceptionInInitializerError(ex);
 		}
