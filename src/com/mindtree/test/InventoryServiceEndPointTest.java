@@ -22,6 +22,7 @@ import com.mindtree.mcse.mobilemall.domain.hibernateannotation.HReview;
 import com.mindtree.mcse.mobilemall.event.AddReviewEvent;
 import com.mindtree.mcse.mobilemall.event.GetHItemEvent;
 import com.mindtree.mcse.mobilemall.event.GetItemEvent;
+import com.mindtree.mcse.mobilemall.event.InventoryCheckEvent;
 import com.mindtree.mcse.mobilemall.ws.InventoryServiceEndPoint;
 @RunWith(SpringJUnit4ClassRunner.class)  
 @ContextConfiguration(locations={"file:WebContent/WEB-INF/applicationContext-test.xml" })
@@ -35,12 +36,18 @@ public class InventoryServiceEndPointTest {
 	private Gson gson = new Gson();
 	
 	@Test
-	public void testAddReviewHibernateAnnotation(){
-		HReview hReview = new HReview("1", "EST-5", "Nokia", new Date(), "TitleReal", "Description");
-		String json = gson.toJson(hReview);
-		AddReviewEvent event = new AddReviewEvent();
-		event.sethReview(json);
-		inventoryServiceEndPoint.addReviewHibernateAnnotation(event);
+	public void testCheckItemInventory(){
+		InventoryCheckEvent event = new InventoryCheckEvent();
+		event.setItemId("EST-5");;
+		inventoryServiceEndPoint.checkItemInventory(event);
+	}
+	
+	@Test
+	public void testUpdateItemInventory(){
+		InventoryCheckEvent event= new InventoryCheckEvent();
+		event.setItemId("EST-5");
+		event.setQuantity(0);
+		inventoryServiceEndPoint.updateItemInventory(event);
 	}
 	
 	@Test
@@ -50,6 +57,15 @@ public class InventoryServiceEndPointTest {
 		AddReviewEvent event = new AddReviewEvent();
 		event.setReview(json);
 		inventoryServiceEndPoint.addReview(event);
+	}
+	
+	@Test
+	public void testAddReviewHibernateAnnotation(){
+		HReview hReview = new HReview("1", "EST-5", "Nokia", new Date(), "TitleReal", "Description");
+		String json = gson.toJson(hReview);
+		AddReviewEvent event = new AddReviewEvent();
+		event.sethReview(json);
+		inventoryServiceEndPoint.addReviewHibernateAnnotation(event);
 	}
 	
 	@Test
