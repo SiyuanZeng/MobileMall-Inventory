@@ -1,10 +1,9 @@
 package com.mindtree.test;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.number.OrderingComparison.*;
 
 import java.util.Date;
-
-import javax.jws.WebMethod;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -38,16 +37,22 @@ public class InventoryServiceEndPointTest {
 	@Test
 	public void testCheckItemInventory(){
 		InventoryCheckEvent event = new InventoryCheckEvent();
-		event.setItemId("EST-5");;
-		inventoryServiceEndPoint.checkItemInventory(event);
+		event.setItemId("EST-5");
+		int inventory = inventoryServiceEndPoint.checkItemInventory(event);
+		assertThat(inventory, greaterThan(0));
+		assertThat(inventory, comparesEqualTo((int)inventory));
 	}
 	
 	@Test
 	public void testUpdateItemInventory(){
-		InventoryCheckEvent event= new InventoryCheckEvent();
-		event.setItemId("EST-5");
-		event.setQuantity(0);
-		inventoryServiceEndPoint.updateItemInventory(event);
+		try {
+			InventoryCheckEvent event= new InventoryCheckEvent();
+			event.setItemId("EST-5");
+			event.setQuantity(0);
+			inventoryServiceEndPoint.updateItemInventory(event);
+		} catch(Exception e){
+			fail();
+		}
 	}
 	
 	@Test
@@ -56,16 +61,20 @@ public class InventoryServiceEndPointTest {
 		String json = gson.toJson(review);
 		AddReviewEvent event = new AddReviewEvent();
 		event.setReview(json);
-		inventoryServiceEndPoint.addReview(event);
+		assertNotNull(inventoryServiceEndPoint.addReview(event));
 	}
 	
 	@Test
 	public void testAddReviewHibernateAnnotation(){
-		HReview hReview = new HReview("1", "EST-5", "Nokia", new Date(), "TitleReal", "Description");
-		String json = gson.toJson(hReview);
-		AddReviewEvent event = new AddReviewEvent();
-		event.sethReview(json);
-		inventoryServiceEndPoint.addReviewHibernateAnnotation(event);
+		try {
+			HReview hReview = new HReview("1", "EST-5", "Nokia", new Date(), "TitleReal", "Description");
+			String json = gson.toJson(hReview);
+			AddReviewEvent event = new AddReviewEvent();
+			event.sethReview(json);
+			inventoryServiceEndPoint.addReviewHibernateAnnotation(event);
+		} catch(Exception e){
+			fail();
+		}
 	}
 	
 	@Test
