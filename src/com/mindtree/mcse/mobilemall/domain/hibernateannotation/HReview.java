@@ -122,7 +122,7 @@ public class HReview implements Comparable<HReview> {
 
 	@Override
 	public int compareTo(HReview review) {
-		return timeStamp.compareTo(review.getTimeStamp());
+		return -timeStamp.compareTo(review.getTimeStamp());
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class HReview implements Comparable<HReview> {
 		public int compare(HReview r1, HReview r2) {
 			LOGGER.debug("r1:" + r1.getTimeStamp());
 			LOGGER.debug("r2:" + r2.getTimeStamp());
-			return r1.timeStamp.compareTo( r2.getTimeStamp()) ;
+			return -r1.timeStamp.compareTo( r2.getTimeStamp()) ;
 		}
 	}
 }
