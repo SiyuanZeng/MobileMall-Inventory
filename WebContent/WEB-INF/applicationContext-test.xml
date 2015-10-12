@@ -42,6 +42,13 @@
 	<!-- Hibernate SessionFactory Definition -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		
+<!-- http://www.mkyong.com/hibernate/how-to-configure-the-c3p0-connection-pool-in-hibernate/ -->
+<!-- hibernate.c3p0.min_size – Minimum number of JDBC connections in the pool. Hibernate default: 1 -->
+<!-- hibernate.c3p0.max_size – Maximum number of JDBC connections in the pool. Hibernate default: 100 -->
+<!-- hibernate.c3p0.timeout – When an idle connection is removed from the pool (in second). Hibernate default: 0, never expire. -->
+<!-- hibernate.c3p0.max_statements – Number of prepared statements will be cached. Increase performance. Hibernate default: 0 , caching is disable. -->
+<!-- hibernate.c3p0.idle_test_period – idle time in seconds before a connection is automatically validated. Hibernate default: 0 -->
 
 		<property name="hibernateProperties">
 			<props>
@@ -78,7 +85,6 @@
 	</bean> 
 
 	<!-- Hibernate DAO's Defintion -->
-	
 	<bean id="inventoryDao" class="com.mindtree.mcse.mobilemall.dao.hibernate.InventoryDaoHibernateImpl">
 		<property name="hibernateTemplate"><ref bean="hibernateTemplate"/></property> 
 	</bean>	
